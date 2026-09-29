@@ -1,0 +1,265 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: 20120620@setu.ie
+    name: Pan Yue
+  description: This API provides endpoints for handling CRUD operations on the Health
+    Tracker data.
+  title: Health Tracker API
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /api/users:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: This is a list of the users in the app
+      x-accepts:
+      - application/json
+    post:
+      description: Add a user to the app
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: The user has been created
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/users/email/{email}:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: email
+        required: true
+        schema:
+          example: joe@soap.com
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: This is a user found by email
+      x-accepts:
+      - application/json
+  /api/users/{user-id}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: user-id
+        required: true
+        schema:
+          example: 3232
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: The user has been deleted
+      x-accepts:
+      - application/json
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: user-id
+        required: true
+        schema:
+          example: 3232
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: This is a specifc user in the app
+      x-accepts:
+      - application/json
+    patch:
+      parameters:
+      - explode: false
+        in: path
+        name: user-id
+        required: true
+        schema:
+          example: 3232
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: The user has been updated
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/users/{user-id}/activities:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: user-id
+        required: true
+        schema:
+          example: 3232
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: The activities for the user have been deleted
+      x-accepts:
+      - application/json
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: user-id
+        required: true
+        schema:
+          example: 3232
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Activity'
+                type: array
+          description: This is a list of activities for the user
+      x-accepts:
+      - application/json
+  /api/activities:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Activity'
+                type: array
+          description: This is a list of activities
+      x-accepts:
+      - application/json
+    post:
+      description: Add an activity to the app
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Activity'
+      responses:
+        "200":
+          description: The activity has been created
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/activities/{activity-id}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: activity-id
+        required: true
+        schema:
+          example: 1234
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: The activity has been deleted
+      x-accepts:
+      - application/json
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: activity-id
+        required: true
+        schema:
+          example: 1234
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+          description: This is a specific activity in the app
+      x-accepts:
+      - application/json
+    patch:
+      parameters:
+      - explode: false
+        in: path
+        name: activity-id
+        required: true
+        schema:
+          example: 1234
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Activity'
+      responses:
+        "200":
+          description: The activity has been updated
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+components:
+  parameters:
+    UserIdPath:
+      description: User id path parameter
+      explode: false
+      in: path
+      name: user-id
+      required: true
+      schema:
+        example: 3232
+        type: integer
+      style: simple
+  schemas:
+    User:
+      example:
+        name: Joe Soap
+        id: 3232
+        email: joe@soap.com
+      properties:
+        id:
+          example: 3232
+          type: integer
+        name:
+          example: Joe Soap
+          type: string
+        email:
+          example: joe@soap.com
+          type: string
+      type: object
+    Activity:
+      type: object
+
