@@ -1,0 +1,234 @@
+
+  openapi: 3.0.0
+
+  info:
+    version: 1.0.0
+    title: Health Tracker API
+    description: This API provides endpoints for handling CRUD operations on the Health Tracker data.
+    contact:
+      name: Pan Yue
+      email: 20120620@setu.ie
+
+  paths:
+
+    /api/users:
+      get:
+        responses:
+          200:
+            description: This is a list of the users in the app
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/User'
+
+      post:
+        description: Add a user to the app
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        responses:
+          200:
+            description: The user has been created
+
+
+    /api/users/email/{email}:
+      get:
+        parameters:
+          - in: path
+            name: email
+            required: true
+            schema:
+              type: string
+              example: joe@soap.com
+        responses:
+          200:
+            description: This is a user found by email
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/User'
+
+
+    /api/users/{user-id}:
+      get:
+        parameters:
+          - in: path
+            name: user-id
+            required: true
+            schema:
+              type: integer
+              example: 3232
+        responses:
+          200:
+            description: This is a specifc user in the app
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/User'
+
+      delete:
+        parameters:
+          - in: path
+            name: user-id
+            required: true
+            schema:
+              type: integer
+              example: 3232
+        responses:
+          200:
+            description: The user has been deleted
+
+      patch:
+        parameters:
+          - in: path
+            name: user-id
+            required: true
+            schema:
+              type: integer
+              example: 3232
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        responses:
+          200:
+            description: The user has been updated
+
+
+    /api/users/{user-id}/activities:
+      get:
+        parameters:
+          - in: path
+            name: user-id
+            required: true
+            schema:
+              type: integer
+              example: 3232
+        responses:
+          200:
+            description: This is a list of activities for the user
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Activity'
+
+      delete:
+        parameters:
+          - in: path
+            name: user-id
+            required: true
+            schema:
+              type: integer
+              example: 3232
+        responses:
+          200:
+            description: The activities for the user have been deleted
+
+
+    /api/activities:
+      get:
+        responses:
+          200:
+            description: This is a list of activities
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Activity'
+
+      post:
+        description: Add an activity to the app
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        responses:
+          200:
+            description: The activity has been created
+
+
+    /api/activities/{activity-id}:
+      get:
+        parameters:
+          - in: path
+            name: activity-id
+            required: true
+            schema:
+              type: integer
+              example: 1234
+        responses:
+          200:
+            description: This is a specific activity in the app
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Activity'
+
+      delete:
+        parameters:
+          - in: path
+            name: activity-id
+            required: true
+            schema:
+              type: integer
+              example: 1234
+        responses:
+          200:
+            description: The activity has been deleted
+
+      patch:
+        parameters:
+          - in: path
+            name: activity-id
+            required: true
+            schema:
+              type: integer
+              example: 1234
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        responses:
+          200:
+            description: The activity has been updated
+
+
+  components:
+
+    parameters:
+      UserIdPath:
+        in: path
+        name: user-id
+        description: User id path parameter
+        required: true
+        schema:
+          type: integer
+          example: 3232
+
+    schemas:
+
+      User:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 3232
+          name:
+            type: string
+            example: Joe Soap
+          email:
+            type: string
+            example: joe@soap.com
+
+      Activity:
+        type: object
