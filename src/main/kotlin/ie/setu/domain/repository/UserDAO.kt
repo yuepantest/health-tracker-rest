@@ -3,6 +3,7 @@ package ie.setu.domain.repository
 import ie.setu.domain.User
 
 class UserDAO {
+
     private val users = arrayListOf<User>(
         User(name = "Alice", email = "alice@wonderland.com", id = 0),
         User(name = "Bob", email = "bob@cat.ie", id = 1),
@@ -15,11 +16,25 @@ class UserDAO {
     }
 
     fun findById(id: Int): User? {
-
         return users.find { it.id == id }
     }
 
     fun save(user: User) {
         users.add(user)
+    }
+
+    fun findByEmail(email: String): User?{
+         return users.find { it.email == email }
+    }
+
+    fun delete(id: Int) {
+        users.removeIf { it.id == id }
+    }
+
+    fun update(id: Int, user: User) {
+        val index = users.indexOfFirst { it.id == id }
+        if (index != -1) {
+            users[index] = user
+        }
     }
 }

@@ -18,9 +18,13 @@ class ServerConfig {
         }.start(7001)
         return app
     }
+
     private fun registerRoutes(config: JavalinConfig) {
         config.routes.get("/api/users", HealthTrackerController::getAllUsers)
         config.routes.get("/api/users/{user-id}", HealthTrackerController::getUserByUserId)
         config.routes.post("/api/users", HealthTrackerController::addUser)
+        config.routes.get("/api/users/email/{email}", HealthTrackerController::getUserByEmail)
+        config.routes.delete("/api/users/{user-id}", HealthTrackerController::deleteUser)
+        config.routes.patch("/api/users/{user-id}", HealthTrackerController::updateUser)
     }
 }

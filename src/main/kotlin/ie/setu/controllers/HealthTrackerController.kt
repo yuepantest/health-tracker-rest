@@ -25,4 +25,21 @@ object HealthTrackerController {
         userDao.save(user)
         ctx.json(user)
     }
+
+    fun getUserByEmail(ctx: Context) {
+        val user = userDao.findByEmail(ctx.pathParam("email"))
+        if (user != null) {
+            ctx.json(user)
+        }
+    }
+
+    fun deleteUser(ctx: Context) {
+        userDao.delete(ctx.pathParam("user-id").toInt())
+    }
+
+    fun updateUser(ctx: Context) {
+        val mapper = jacksonObjectMapper()
+        val user = mapper.readValue<User>(ctx.body())
+        userDao.update(ctx.pathParam("user-id").toInt(), user)
+    }
 }
