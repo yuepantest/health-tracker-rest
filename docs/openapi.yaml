@@ -10,7 +10,6 @@
       email: 20120620@setu.ie
 
   paths:
-
     /api/users:
       get:
         responses:
@@ -22,7 +21,6 @@
                   type: array
                   items:
                     $ref: '#/components/schemas/User'
-
       post:
         description: Add a user to the app
         requestBody:
@@ -33,8 +31,6 @@
         responses:
           200:
             description: The user has been created
-
-
     /api/users/email/{email}:
       get:
         parameters:
@@ -51,8 +47,6 @@
               application/json:
                 schema:
                   $ref: '#/components/schemas/User'
-
-
     /api/users/{user-id}:
       get:
         parameters:
@@ -69,7 +63,6 @@
               application/json:
                 schema:
                   $ref: '#/components/schemas/User'
-
       delete:
         parameters:
           - in: path
@@ -81,7 +74,6 @@
         responses:
           200:
             description: The user has been deleted
-
       patch:
         parameters:
           - in: path
@@ -98,8 +90,6 @@
         responses:
           200:
             description: The user has been updated
-
-
     /api/users/{user-id}/activities:
       get:
         parameters:
@@ -118,7 +108,6 @@
                   type: array
                   items:
                     $ref: '#/components/schemas/Activity'
-
       delete:
         parameters:
           - in: path
@@ -130,8 +119,6 @@
         responses:
           200:
             description: The activities for the user have been deleted
-
-
     /api/activities:
       get:
         responses:
@@ -143,7 +130,6 @@
                   type: array
                   items:
                     $ref: '#/components/schemas/Activity'
-
       post:
         description: Add an activity to the app
         requestBody:
@@ -154,8 +140,6 @@
         responses:
           200:
             description: The activity has been created
-
-
     /api/activities/{activity-id}:
       get:
         parameters:
@@ -172,7 +156,6 @@
               application/json:
                 schema:
                   $ref: '#/components/schemas/Activity'
-
       delete:
         parameters:
           - in: path
@@ -184,7 +167,6 @@
         responses:
           200:
             description: The activity has been deleted
-
       patch:
         parameters:
           - in: path
@@ -201,10 +183,7 @@
         responses:
           200:
             description: The activity has been updated
-
-
   components:
-
     parameters:
       UserIdPath:
         in: path
@@ -214,9 +193,7 @@
         schema:
           type: integer
           example: 3232
-
     schemas:
-
       User:
         type: object
         properties:
@@ -229,6 +206,5 @@
           email:
             type: string
             example: joe@soap.com
-
       Activity:
         type: object
