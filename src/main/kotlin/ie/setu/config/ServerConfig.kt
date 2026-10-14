@@ -15,7 +15,7 @@ class ServerConfig {
                 ctx.json("404 - Not Found")
             }
             registerRoutes(config)
-        }.start(7001)
+        }.start(getRemoteAssignedPort())
         return app
     }
 
@@ -26,5 +26,11 @@ class ServerConfig {
         config.routes.get("/api/users/email/{email}", HealthTrackerController::getUserByEmail)
         config.routes.delete("/api/users/{user-id}", HealthTrackerController::deleteUser)
         config.routes.patch("/api/users/{user-id}", HealthTrackerController::updateUser)
+    }
+    private fun getRemoteAssignedPort(): Int {
+        val remotePort = System.getenv("PORT")
+        return if (remotePort != null) {
+            Integer.parseInt(remotePort)
+        } else 8080
     }
 }
